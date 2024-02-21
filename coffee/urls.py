@@ -18,17 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
-#from accounts.api.views import AccountsListCreateView ### Account View
-
-##from users.api.views import UserProfileExampleViewSet
+from accounts.Api.views import AccountListCreateView
 
 router = SimpleRouter()
 
-#router.register("users", UserProfileExampleViewSet, basename="users")
-#router.register("api/Accounts", AccountsListCreateView, basename="Accounts-list") ## <-- Account list view route
+router.register("api/accounts", AccountListCreateView, basename="accounts-list")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/token-auth/", views.obtain_auth_token),
+    
     #path('accounts/', AccountsListCreateView.as_view(), name='account-list-create'),
 ]+router.urls

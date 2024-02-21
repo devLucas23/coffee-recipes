@@ -1,8 +1,8 @@
-from accounts.Api.serializers import AccountSerializer
 from rest_framework.viewsets import ModelViewSet
-from accounts.models import account
-from accounts.api.views import AccountListCreateView
+from accounts.Api.serializers import AccountSerializer
+from accounts.models import Accounts
 
 class AccountListCreateView(ModelViewSet):
-    queryset = account.objects.all()
+    queryset = Accounts.objects.all()
     serializer_class = AccountSerializer
+    
