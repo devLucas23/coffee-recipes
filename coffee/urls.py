@@ -19,10 +19,12 @@ from django.urls import path
 from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
 from accounts.Api.views import AccountListCreateView
+from recipes.Api.views import RecipeListCreateView
 
 router = SimpleRouter()
 
 router.register("api/accounts", AccountListCreateView, basename="accounts-list")
+router.register("api/recipes", RecipeListCreateView, basename="recipes-list")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
