@@ -5,4 +5,5 @@ from accounts.models import Accounts
 class AccountListCreateView(ModelViewSet):
     queryset = Accounts.objects.all()
     serializer_class = AccountSerializer
+
     
