@@ -20,7 +20,7 @@ from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
 from accounts.Api.views import AccountListCreateView
 from register.Api.views import RegisterListCreateView
-from recipes.Api.views import RecipeListCreateView
+from recipes.Api.views import RecipeListCreateView, IngredientListCreateView
 
 router = SimpleRouter()
 
@@ -29,6 +29,8 @@ router.register("api/accounts", AccountListCreateView, basename="accounts-list")
 router.register("api/register", RegisterListCreateView, basename="register-list")
 
 router.register("api/recipes", RecipeListCreateView, basename="recipes-list")
+
+router.register("api/ingredient", IngredientListCreateView, basename="ingredient-list")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
