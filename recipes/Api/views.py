@@ -9,3 +9,4 @@ class RecipeListCreateView(ModelViewSet):
 class IngredientListCreateView(ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    
