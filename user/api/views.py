@@ -4,6 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from user.models import CustomUser
 from .serializers import CustomUserSerializer
+from rest_framework.status import HTTP_200_OK
 
 class UserCreateView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -11,11 +12,10 @@ class UserCreateView(generics.CreateAPIView):
 
 class UserLoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        token = response.data.get('token')  # Obter o token do response data
-        if token:
-            return Response({'token': token})
-        else:
-            user = request.user  # Obter o usuário autenticado
-            token, created = Token.objects.get_or_create(user=user)  # Criar ou obter o token
-            return Response({'token': token.key})
+        serializer = self.serializer_class(data=request.data,
+                                            context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        user_serializer = CustomUserSerializer(user)
+        return Response({'token': token.key, 'user': user_serializer.data}, status=HTTP_200_OK)
