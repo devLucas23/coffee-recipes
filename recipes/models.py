@@ -7,6 +7,7 @@ class Recipes (models.Model):
     description = models.TextField()
     preparation = models.TextField()
     user_id = models.IntegerField(default=1)
+    likes = models.IntegerField(default=1)
 
     def _str_(self):
         return self.title

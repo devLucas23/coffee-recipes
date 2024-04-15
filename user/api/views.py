@@ -18,4 +18,5 @@ class UserLoginView(ObtainAuthToken):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         user_serializer = CustomUserSerializer(user)
-        return Response({'token': token.key, 'user': user_serializer.data}, status=HTTP_200_OK)
+        profile_image_url = request.build_absolute_uri(user.profile_image.url) if user.profile_image else None
+        return Response({'token': token.key, 'user': user_serializer.data, 'profile_image_url': profile_image_url}, status=HTTP_200_OK)

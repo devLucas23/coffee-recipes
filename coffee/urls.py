@@ -5,6 +5,8 @@ from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
 from recipes.Api.views import RecipeListCreateView, IngredientListCreateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = SimpleRouter()
 
@@ -21,3 +23,6 @@ urlpatterns = [
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     
 ]+router.urls
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

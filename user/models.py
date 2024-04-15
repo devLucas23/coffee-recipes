@@ -20,6 +20,8 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
