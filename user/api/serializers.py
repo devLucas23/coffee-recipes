@@ -3,6 +3,7 @@ from user.models import CustomUser
 
 class CustomUserSerializer(serializers.ModelSerializer):
     profile_image = serializers.ImageField(write_only=True)
+
     class Meta:
         model = CustomUser
         fields = ('id', 'username', 'email', 'password', 'profile_image')
@@ -10,11 +11,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         profile_image = validated_data.pop('profile_image', None)
-        user = CustomUser.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
+        user = CustomUser.objects.create_user(**validated_data)
         if profile_image:
-            user.profile_image.save(profile_image.name, profile_image, save=True) 
+            user.profile_image = profile_image
+            user.save()
         return user
