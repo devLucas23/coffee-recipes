@@ -92,18 +92,11 @@ DATABASES = {
 '''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'coffee',
-        'USER': 'grupo',
-        'PASSWORD': 'coffee123123@',
-        'HOST': 'localhost',  # ou o endereço do seu servidor MySQL
-        'PORT': '3306',  # porta padrão do MySQL
-        'OPTIONS' : {
-        'charset': 'utf8mb4',
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
+        'ENGINE': 'django.db.backends.sqlite3',  # Usando SQLite
+        'NAME': BASE_DIR / 'db.sqlite3',          # Nome do arquivo do banco de dados
     }
 }
+
 
 
 
